@@ -6,9 +6,6 @@ const { data } = useAsyncData(
   },
   { watch: [route] },
 );
-definePageMeta({
-  layout: "tools",
-});
 </script>
 
 <template>
