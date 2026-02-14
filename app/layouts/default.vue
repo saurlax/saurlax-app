@@ -11,24 +11,21 @@ const items = computed(() => [
   },
 ]);
 
-const { data: subnavItems } = await useLazyAsyncData(
-  "subnav",
-  () => {
-    return queryCollectionNavigation("tools")
+const { data: subnavItems } = useAsyncData(
+  async () => {
+    return await queryCollectionNavigation("tools")
       .where("path", "LIKE", `/${route.path.split("/")[1]}%`)
       .then((items) =>
         items[0]?.children?.map((item) => {
-          console.log(route.path, item.path);
-
           return {
             label: item.title,
             to: item.path,
             active: route.path.startsWith(item.path),
           };
-        })
+        }),
       );
   },
-  { watch: [route] }
+  { watch: [route] },
 );
 </script>
 

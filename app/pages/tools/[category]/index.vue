@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
-const { data } = await useAsyncData(
-  "tools-items",
-  () => {
+const { data } = useAsyncData(
+  async () => {
     return queryCollection("tools")
       .where("path", "LIKE", `${route.path}%`)
       .all()
@@ -16,7 +15,7 @@ const { data } = await useAsyncData(
         });
       });
   },
-  { watch: [route] }
+  { watch: [route] },
 );
 definePageMeta({
   layout: "tools",
