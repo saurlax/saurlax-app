@@ -5,44 +5,26 @@ const { commitHash } = useAppConfig();
 const items = computed(() => [
   {
     label: "Tools",
-    icon: "i-lucide-toolbox",
     to: "/tools/crypto",
     active: route.path.startsWith("/tools"),
   },
 ]);
-
-const { data: subnavItems } = useAsyncData(
-  async () => {
-    return await queryCollectionNavigation("tools")
-      .where("path", "LIKE", `/${route.path.split("/")[1]}%`)
-      .then((items) =>
-        items[0]?.children?.map((item) => {
-          return {
-            label: item.title,
-            to: item.path,
-            active: route.path.startsWith(item.path),
-          };
-        }),
-      );
-  },
-  { watch: [route] },
-);
 </script>
 
 <template>
-  <UHeader class="h-[unset] [&>div:first-child]:h-(--ui-header-height)">
+  <UHeader>
     <template #title>
       <Logo />
     </template>
 
-    <UNavigationMenu :items="items" />
+    <UNavigationMenu :items="items" variant="link" />
 
     <template #right>
       <UColorModeButton />
       <UButton
         color="neutral"
         variant="ghost"
-        to="https://github.com/saurlax/nuxt-app"
+        to="https://github.com/saurlax/saurlax-app"
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"
@@ -51,15 +33,6 @@ const { data: subnavItems } = useAsyncData(
 
     <template #body>
       <UNavigationMenu :items="items" orientation="vertical" />
-      <USeparator class="my-2" type="dashed" />
-      <UNavigationMenu :items="subnavItems" orientation="vertical" />
-    </template>
-
-    <template v-if="route.path !== '/'" #bottom>
-      <USeparator />
-      <UContainer>
-        <UNavigationMenu :items="subnavItems" highlight />
-      </UContainer>
     </template>
   </UHeader>
   <UMain>
@@ -77,13 +50,3 @@ const { data: subnavItems } = useAsyncData(
     </template>
   </UFooter>
 </template>
-
-<style scoped>
-header {
-  height: none !important;
-}
-
-header > div:first-child {
-  height: var(--ui-header-height) !important;
-}
-</style>

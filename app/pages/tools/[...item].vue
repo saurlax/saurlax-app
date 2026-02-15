@@ -1,11 +1,8 @@
 <script setup lang="ts">
 const route = useRoute();
-const { data } = useAsyncData(
-  async () => {
-    return queryCollection("tools").path(route.path).first();
-  },
-  { watch: [route] },
-);
+const { data } = await useAsyncData(route.path, () => {
+  return queryCollection("tools").path(route.path).first();
+});
 </script>
 
 <template>

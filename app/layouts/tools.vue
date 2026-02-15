@@ -1,13 +1,7 @@
 <script setup lang="ts">
-const route = useRoute();
-const { data } = useAsyncData(
-  async () => {
-    return await queryCollectionNavigation("tools")
-      .where("path", "LIKE", `${route.path.split("/").slice(0, 3).join("/")}%`)
-      .then((items) => items[0]?.children?.[0]?.children ?? []);
-  },
-  { watch: [route] },
-);
+const { data } = await useAsyncData(() => {
+  return queryCollectionNavigation("tools");
+});
 </script>
 
 <template>
@@ -16,7 +10,7 @@ const { data } = useAsyncData(
       <UPage>
         <template #left>
           <UPageAside>
-            <UContentNavigation :navigation="data" />
+            <UContentNavigation :navigation="data?.[0]?.children" highlight />
           </UPageAside>
         </template>
         <slot />
