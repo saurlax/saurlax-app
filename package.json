@@ -1,12 +1,10 @@
 {
-  "name": "nuxt-app",
+  "name": "saurlax-app",
   "type": "module",
   "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {

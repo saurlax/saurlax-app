@@ -5,7 +5,7 @@
       description="Tools collection powered bt Nuxt."
     >
       <template #links>
-        <UButton to="/tools/crypto/rsa">Get Started</UButton>
+        <UButton to="/tools">Get Started</UButton>
         <UButton variant="outline">Documentation</UButton>
       </template>
     </UPageHero>

@@ -5,7 +5,7 @@ const { commitHash } = useAppConfig();
 const items = computed(() => [
   {
     label: "Tools",
-    to: "/tools/crypto",
+    to: "/tools",
     active: route.path.startsWith("/tools"),
   },
 ]);
